@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public ScoreController scoreController; 
     public Animator animator;
-    public float speed;
-    public float jump;
+    private float speed=5;
+    private float jump=40;
     //private bool Ground;
     //bool Crouch = false;
     private Rigidbody2D rb2d;
@@ -15,6 +16,12 @@ public class PlayerController : MonoBehaviour
     {
     Debug.Log("Player controller awake");   
     rb2d= gameObject.GetComponent<Rigidbody2D>(); 
+    }
+
+    public void PickUpKey()
+    {
+    Debug.Log("Player picked up the key"); 
+    scoreController.IncreaseScore(10); 
     }
 
     // private void OnCollisionEnter2D(Collision2D collision)
@@ -91,12 +98,14 @@ public class PlayerController : MonoBehaviour
         //crouch
          if(Input.GetKeyDown(KeyCode.LeftControl))
          {
-           animator.SetBool("Crouch",true);  
+           animator.SetBool("Crouch",true); 
+           speed=0; jump=0; 
          }
 
          if(Input.GetKeyUp(KeyCode.LeftControl))
          {
-           animator.SetBool("Crouch",false);  
+           animator.SetBool("Crouch",false); 
+           speed=5; jump=40; 
          }
       
           
