@@ -1,21 +1,52 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public ScoreController scoreController; 
     public Animator animator;
-    private float speed=5;
-    private float jump=40;
+    public float speed=5;
+    public float jump=100;
     //private bool Ground;
     //bool Crouch = false;
     private Rigidbody2D rb2d;
+    private int health=3;
+    public GameObject[] hearts;
      
     private void Awake()
     {
     Debug.Log("Player controller awake");   
     rb2d= gameObject.GetComponent<Rigidbody2D>(); 
+    }
+
+    public void KillPlayer()
+    {
+    health =health -1;
+    Debug.Log("remaining lives:"+ health);
+    if(health<1)
+    {
+     Destroy(hearts[0].gameObject); 
+    }else if(health<2)
+    {
+     Destroy(hearts[1].gameObject); 
+    }else if(health<3)
+    {
+     Destroy(hearts[2].gameObject); 
+    } 
+    //Destroy(gameObject);
+    if(health<=0)
+    {
+    animator.SetBool("Death",true);
+    //Invoke("ReloadLevel",2);
+    ReloadLevel();
+    } 
+    }
+
+    public void ReloadLevel()
+    {
+      SceneManager.LoadScene(0);
     }
 
     public void PickUpKey()
