@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -26,8 +26,11 @@ public void IncreaseScore(int increment)
 private void RefreshUI()
    {
      scoreText.text = "Score: "+ score;
-   }   
+   }
+
+      
 }
+
 
 
 

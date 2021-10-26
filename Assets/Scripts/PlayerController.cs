@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private int health=3;
     public GameObject[] hearts;
+    public GameOverController GameOverController;
      
     private void Awake()
     {
@@ -39,14 +40,18 @@ public class PlayerController : MonoBehaviour
     if(health<=0)
     {
     animator.SetBool("Death",true);
-    //Invoke("ReloadLevel",2);
-    ReloadLevel();
+   // GameOverController.PlayerDied();
+    //this.enabled = false;
+    Invoke("ReloadLevel",2);
+    
     } 
     }
 
     public void ReloadLevel()
     {
-      SceneManager.LoadScene(0);
+      GameOverController.PlayerDied();
+      this.enabled = false;
+     //SceneManager.LoadScene(0);
     }
 
     public void PickUpKey()
